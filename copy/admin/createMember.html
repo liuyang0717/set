@@ -1,0 +1,55 @@
+<html>
+<head>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+function login() {
+        var jsonData = {
+                "token":$("#token").val(),
+                "name":$("#name").val(),
+                "username":$("#username").val(),
+                "password":$("#password").val(),
+                "location":$("#location").val(),
+                "admin":$("#admin").val()
+        };
+        $.ajax({
+                type: "POST",
+                url: "http://39.108.169.185/admin/createMember",
+                contentType: "application/json",
+                data: JSON.stringify(jsonData),
+                dataType: "text",
+                xhrFields: {
+                        withCredentials: true
+                },
+                success: function(msg) {
+                        $("#msg").text(msg);
+                },
+                error: function() {
+                        $("#msg").text("error");
+                }
+        });
+}
+</script>
+<style>
+input {
+        display: block;
+}
+</style>
+</head>
+<body>
+<form>
+<label>token</label>
+<input type="text" id="token">
+<label>name</label>
+<input type="text" id="name">
+<label>username</label>
+<input type="text" id="username">
+<label>password</label>
+<input type="text" id="password">
+<label>location</label>
+<input type="text" id="location">
+<label>admin</label>
+<input type="text" id="admin">
+<input type="button" onclick="login()" value="login" />
+</form>
+<p id="msg"></p>
+</body>
